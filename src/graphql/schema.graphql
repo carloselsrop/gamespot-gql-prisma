@@ -1,0 +1,68 @@
+# Types
+type User {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  password: String!
+}
+type Brand {
+  id: ID!
+  name: String!
+}
+type Game {
+  id: ID!
+  name: String!
+  description: String!
+  brand: Brand!
+}
+
+# Inputs
+input SignUpInput {
+  email: String! @constraint(format: "email", maxLength: 255)
+  password: String! @constraint(maxLength: 255)
+  firstName: String! @constraint(pattern: "^[0-9a-zA-Z]*$", maxLength: 255)
+  lastName: String! @constraint(pattern: "^[0-9a-zA-Z]*$", maxLength: 255)
+}
+
+input CreateBrandInput {
+  name: String!
+}
+input UpdateBrandInput {
+  id: ID!
+  name: String!
+}
+input DeleteBrandInput {
+  id: ID!
+}
+input GameInput {
+  name: String!
+  description: String!
+  brandId: ID!
+}
+
+
+# Queries
+type Query {
+  getUsers: [User]
+  getBrand(id: ID!): Brand
+  getBrands: [Brand]
+  getGame: Game
+  getGames: [Game]
+}
+
+# Mutations
+type Mutation {
+  signUp(input: SignUpInput!): User
+  createBrand(input: CreateBrandInput): Brand
+  updateBrand(input: UpdateBrandInput): Brand
+  deleteBrand(input: DeleteBrandInput): Brand
+  createGame(input: GameInput): Game
+}
+
+# Subscriptions
+type Subscription {
+  createdBrand: Brand
+  createdGame: Game
+  createdUser: User
+}

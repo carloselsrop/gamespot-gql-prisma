@@ -1,0 +1,2 @@
+## RUN A MIGRATE TO DEVELOP MODE
+npx prisma migrate dev --name migrate_name
