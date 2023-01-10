@@ -14,6 +14,7 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 import { readFileSync } from 'fs'
 import resolvers from './resolvers'
+import { User } from '@prisma/client'
 
 const typeDefs = readFileSync('./src/graphql/schema.graphql').toString('utf-8')
 
@@ -31,6 +32,10 @@ const wsServer = new WebSocketServer({
   path: '/subscriptions',
 })
 const serverCleanup = useServer({ schema }, wsServer)
+
+interface MyContext {
+  user: User
+}
 
 const server = new ApolloServer({
   schema,

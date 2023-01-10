@@ -5,6 +5,7 @@ type User {
   lastName: String!
   email: String!
   password: String!
+  token: String
 }
 type Brand {
   id: ID!
@@ -24,7 +25,6 @@ input SignUpInput {
   firstName: String! @constraint(pattern: "^[0-9a-zA-Z]*$", maxLength: 255)
   lastName: String! @constraint(pattern: "^[0-9a-zA-Z]*$", maxLength: 255)
 }
-
 input CreateBrandInput {
   name: String!
 }
@@ -44,25 +44,41 @@ input GameInput {
 
 # Queries
 type Query {
+  # USERS
   getUsers: [User]
+  getUser(id: ID!): User
+
+  #BRANDS
   getBrand(id: ID!): Brand
   getBrands: [Brand]
+
+  #GAMES
   getGame: Game
   getGames: [Game]
 }
 
 # Mutations
 type Mutation {
+  # USERS
   signUp(input: SignUpInput!): User
+
+  #BRANDS
   createBrand(input: CreateBrandInput): Brand
   updateBrand(input: UpdateBrandInput): Brand
   deleteBrand(input: DeleteBrandInput): Brand
+
+  #GAMES
   createGame(input: GameInput): Game
 }
 
 # Subscriptions
 type Subscription {
-  createdBrand: Brand
-  createdGame: Game
+  #USERS
   createdUser: User
+
+  #BRANDS
+  createdBrand: Brand
+
+  #GAMES
+  createdGame: Game
 }
