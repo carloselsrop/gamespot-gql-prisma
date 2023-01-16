@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "compile": "tsc",
-    "start": "nodemon"
+    "start": "nodemon",
+    "production" : "node tsc"
   },
   "keywords": [],
   "author": "",
